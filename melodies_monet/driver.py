@@ -149,7 +149,7 @@ class observation:
         """
         from glob import glob
         from numpy import sort
-        from . import tutorial
+        from melodies_monet import tutorial
 
         if self.file.startswith("example:"):
             example_id = ":".join(s.strip() for s in self.file.split(":")[1:])
@@ -277,7 +277,7 @@ class model:
         """
         from numpy import sort  # TODO: maybe use `sorted` for this
         from glob import glob
-        from . import tutorial
+        from melodies_monet import tutorial
 
         print(self.file_str)
         if self.file_str.startswith("example:"):
@@ -348,7 +348,7 @@ class model:
             print('**** Reading CESM SE model output...')
             self.mod_kwargs.update({'var_list' : list_input_var})
             if self.scrip_file.startswith("example:"):
-                from . import tutorial
+                from melodies_monet import tutorial
                 example_id = ":".join(s.strip() for s in self.scrip_file.split(":")[1:])
                 self.scrip_file = tutorial.fetch_example(example_id)
             self.mod_kwargs.update({'scrip_file' : self.scrip_file})            
