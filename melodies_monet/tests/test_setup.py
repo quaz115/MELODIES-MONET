@@ -59,7 +59,8 @@ for field_name in field_names:
     units = control['model']['test_model']['variables'][field_name]['units']
     field = np.random.rand(nlat, nlon)
     field_da = xr.DataArray(
-        field, coords=[lat_da, lon_da], dims=['lat', 'lon'], attrs={'units': units})
+        field, coords=[lat_da, lon_da],
+        dims=['lat', 'lon'], attrs={'units': units})
     ds_dict[field_name] = field_da
 ds = xr.Dataset(ds_dict)
 ds.to_netcdf(control['model']['test_model']['files'])
