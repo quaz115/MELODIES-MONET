@@ -42,3 +42,13 @@ Open dataset
 """
 ds = xr.load_dataset(control['model']['test_model']['files'])
 logging.info(ds)
+
+"""
+driver.py
+    paired_data = model_obj.monet.combine_point(obs.obj, radius, label)
+monet_accessor.py
+    combine_point(self, data)
+        combine_da_to_df or combine_da_to_df_xesmf
+monet/util/combinetool.py
+    combine_da_to_df(da, df, merge=True, **kwargs)
+"""
