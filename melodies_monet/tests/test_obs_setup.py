@@ -7,7 +7,7 @@ import yaml
 import math
 import numpy as np
 import scipy as sp
-import xarray as xr
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--control', type=str,
@@ -31,3 +31,11 @@ Read YAML control
 """
 with open(args.control, 'r') as f:
     control = yaml.safe_load(f)
+
+"""
+Generate random test observations
+"""
+var_names = control['obs']['test_obs']['variables'].keys()
+ds_dict = dict()
+for var_name in var_names:
+    ds_dict[var_name] = None
