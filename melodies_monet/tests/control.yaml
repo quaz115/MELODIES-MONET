@@ -23,9 +23,14 @@ model:
         projection: None
 
 obs:
-    test:
+    test_obs:
         filename: test_obs.nc
         obs_type: pt_sfc
+        variables:
+            A_obs:
+                unit_scale: 1
+            B_obs:
+                unit_scale: 1
 
 test_setup:
     random_seed: 3
