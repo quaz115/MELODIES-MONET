@@ -32,9 +32,11 @@ Read YAML control
 with open(args.control, 'r') as f:
     control = yaml.safe_load(f)
 
-start_timestamp = pd.to_datetime(control['analysis']['start_time'])
-end_timestamp = pd.to_datetime(control['analysis']['start_time'])
-print(start_timestamp, end_timestamp)
+start_time = pd.to_datetime(control['analysis']['start_time'])
+end_time = pd.to_datetime(control['analysis']['end_time'])
+datetime_indices = pd.date_range(start_time, end_time,
+    periods=control['test_setup']['ntime'])
+print(datetime_indices)
 
 """
 Generate random test observations
