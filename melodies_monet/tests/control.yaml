@@ -28,12 +28,17 @@ obs:
         obs_type: pt_sfc
         variables:
             A_obs:
+                units: 'Units of A' 
                 unit_scale: 1
+                unit_scale_method: '*'
             B_obs:
+                units: 'Units of B' 
                 unit_scale: 1
+                unit_scale_method: '*'
 
 test_setup:
     random_seed: 3
+    ntime: 100
     grid:
         nlat: 180
         nlon: 360
