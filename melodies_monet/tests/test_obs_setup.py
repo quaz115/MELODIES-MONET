@@ -8,6 +8,7 @@ import math
 import numpy as np
 import scipy as sp
 import pandas as pd
+import xarray as xr
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--control', type=str,
@@ -36,7 +37,6 @@ start_time = pd.to_datetime(control['analysis']['start_time'])
 end_time = pd.to_datetime(control['analysis']['end_time'])
 datetime_indices = pd.date_range(start_time, end_time,
     freq=control['test_setup']['freq'])
-print(datetime_indices)
 ntime = len(datetime_indices)
 
 """
@@ -49,5 +49,7 @@ df_dict = dict()
 for var_name in var_names:
     df_dict[var_name] = np.random.rand(ntime)
 
-df = pd.DataFrame(df_dict, index=datetime_indices)
-print(df)
+df = pd.DataFrame(df_dict, index=datetime_indices).to_xarray()
+ds = xr.Dataset(df)
+print(ds)
+ds.to_netcdf(control['obs']['test_obs']['filename'])
