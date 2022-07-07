@@ -35,7 +35,7 @@ with open(args.control, 'r') as f:
 start_time = pd.to_datetime(control['analysis']['start_time'])
 end_time = pd.to_datetime(control['analysis']['end_time'])
 datetime_indices = pd.date_range(start_time, end_time,
-    periods=control['test_setup']['ntime'])
+    freq=control['test_setup']['freq'])
 print(datetime_indices)
 
 """

@@ -38,7 +38,7 @@ obs:
 
 test_setup:
     random_seed: 3
-    ntime: 100
+    freq: '60min'
     grid:
         nlat: 180
         nlon: 360
