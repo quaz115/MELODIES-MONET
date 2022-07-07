@@ -37,11 +37,17 @@ end_time = pd.to_datetime(control['analysis']['end_time'])
 datetime_indices = pd.date_range(start_time, end_time,
     freq=control['test_setup']['freq'])
 print(datetime_indices)
+ntime = len(datetime_indices)
 
 """
 Generate random test observations
 """
+np.random.seed(control['test_setup']['random_seed'])
+
 var_names = control['obs']['test_obs']['variables'].keys()
-ds_dict = dict()
+df_dict = dict()
 for var_name in var_names:
-    ds_dict[var_name] = None
+    df_dict[var_name] = np.random.rand(ntime)
+
+df = pd.DataFrame(df_dict, index=datetime_indices)
+print(df)
