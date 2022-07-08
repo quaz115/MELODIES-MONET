@@ -1,0 +1,27 @@
+name: melodies-monet
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9.7
+  - pyyaml=6.0
+  - numpy=1.19.5
+  - pandas=1.3.4
+  - xarray=0.20.1
+  - dask=2021.11.2
+  - netcdf4=1.5.8
+  - pyhdf=0.10.3
+  - xesmf=0.6.2
+  - pyresample=1.22.2
+  - matplotlib-base=3.5.0
+  - seaborn=0.11.2
+  - cartopy=0.20.1
+  - pydecorate=0.3.1
+  - wrf-python=1.3.2.6 
+  - gdown=4.4.0
+  # - monetio=0.2.0
+  # - monet=2.2.4
+  - pip=21.2.4
+  - pip:
+    - git+https://github.com/noaa-oar-arl/monetio
+    - git+https://github.com/noaa-oar-arl/monet
