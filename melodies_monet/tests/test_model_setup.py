@@ -7,6 +7,7 @@ import yaml
 import math
 import numpy as np
 import scipy as sp
+import pandas as pd
 import xarray as xr
 
 parser = argparse.ArgumentParser()
@@ -31,6 +32,14 @@ Read YAML control
 """
 with open(args.control, 'r') as f:
     control = yaml.safe_load(f)
+
+start_time = pd.to_datetime(control['analysis']['start_time'])
+end_time = pd.to_datetime(control['analysis']['end_time'])
+datetime_indices = pd.date_range(start_time, end_time,
+    freq=control['test_setup']['freq'])
+ntime = len(datetime_indices)
+datetimes = [np.datetime64(dt) for dt in datetime_indices]
+print(datetimes)
 
 """
 Generate uniform grid
