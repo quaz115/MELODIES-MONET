@@ -3,23 +3,32 @@ analysis:
     end_time:   '2019-09-11'
     debug: False
 
+test_setup:
+    random_seed: 3
+    freq: 60min
+    grid:
+        nlat: 180
+        nlon: 360
+
 model:
     test_model:
         files: test_model.nc
-        mod_type: random
+        mod_type: test
         variables:
             A:
                 units: 'Units of A' 
                 unit_scale: 100.0
                 unit_scale_method: '*'
+                test_generator: random_uniform
             B:
                 units: 'Units of B'
                 unit_scale: 0.01
                 unit_scale_method: '*'
+                test_generator: random_uniform
         mapping:
             test_obs:
-                A: "A_obs"
-                B: "B_obs"
+                A: 'A_obs'
+                B: 'B_obs'
         projection: None
 
 obs:
@@ -36,9 +45,3 @@ obs:
                 unit_scale: 1
                 unit_scale_method: '*'
 
-test_setup:
-    random_seed: 3
-    freq: '60min'
-    grid:
-        nlat: 180
-        nlon: 360

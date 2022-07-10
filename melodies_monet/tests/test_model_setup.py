@@ -71,12 +71,16 @@ Generate random test fields
 np.random.seed(control['test_setup']['random_seed'])
 field_names = control['model']['test_model']['variables'].keys()
 ds_dict = dict()
+
 for field_name in field_names:
     units = control['model']['test_model']['variables'][field_name]['units']
-    field = np.random.rand(ntime, nlat, nlon)
+    generator = control['model']['test_model']['variables'][field_name]['test_generator']
+    if generator == 'random_uniform':
+        field = np.random.rand(ntime, nlat, nlon)
     field_da = xr.DataArray(
         field, coords=[time_da, lat_da, lon_da],
         dims=['time', 'lat', 'lon'], attrs={'units': units})
     ds_dict[field_name] = field_da
+
 ds = xr.Dataset(ds_dict)
 ds.to_netcdf(control['model']['test_model']['files'])
