@@ -31,6 +31,11 @@ def test_open_obs():
         print(analysis.obs[obs_set])
     assert True
 
+def test_obs_to_df():
+    global analysis
+    for obs_set in analysis.obs.keys():
+        analysis.obs[obs_set].obs_to_df()
+    assert True
 
 def test_cleanup():
     global analysis

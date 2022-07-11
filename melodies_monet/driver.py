@@ -232,7 +232,11 @@ class observation:
         -------
         None
         """
-        self.obj = self.obj.to_dataframe().reset_index().drop(['x', 'y'], axis=1)
+        try:
+            self.obj = self.obj.to_dataframe().reset_index().drop(['x', 'y'], axis=1)
+        except:
+            self.obj = self.obj.to_dataframe().reset_index()
+        print(self.obj.info())
         print(self.obj.memory_usage())
 
 
