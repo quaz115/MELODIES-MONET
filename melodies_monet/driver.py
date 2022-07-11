@@ -175,14 +175,18 @@ class observation:
             print('something happened opening file:', e)
             return
 
+        self.drop_unused_vars()
+
+        self.mask_and_scale()  # mask and scale values from the control values
+
+    def drop_unused_vars(self):
+
         # drop unused variables
         print()
         for var in self.obj.keys():
             if var not in self.variable_dict:
                 print('observation.open_obs:dropping:' + var)
                 self.obj = self.obj.drop(var)
-
-        self.mask_and_scale()  # mask and scale values from the control values
 
     def mask_and_scale(self):
         """Mask and scale observations, including unit conversions and setting
