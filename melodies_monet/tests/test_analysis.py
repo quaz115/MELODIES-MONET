@@ -28,12 +28,14 @@ def test_read_control():
 def test_open_models():
     global analysis
     analysis.open_models()
+    print(analysis.models)
     assert True
 
 
 def test_open_obs():
     global analysis
     analysis.open_obs()
+    print(analysis.obs)
     assert True
 
 
