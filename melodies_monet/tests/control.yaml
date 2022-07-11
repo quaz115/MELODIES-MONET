@@ -35,6 +35,7 @@ obs:
     test_obs:
         filename: test_obs.nc
         obs_type: pt_sfc
+        drop_unused_vars: True
         variables:
             A_obs:
                 units: 'Units of A' 
