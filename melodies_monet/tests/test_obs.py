@@ -1,5 +1,5 @@
 """
-pytest test_analysis.py
+pytest test_observation.py
 """
 import sys
 sys.path.insert(0, '..')
@@ -7,7 +7,7 @@ import driver
 
 """
 define a variable in the global scope
-to hold a driver.analysis object
+to hold a driver.observation object
 and be shared across unit tests
 """
 analysis = None
@@ -24,16 +24,11 @@ def test_read_control():
     analysis.read_control()
     assert True
 
-
-def test_open_models():
-    global analysis
-    analysis.open_models()
-    assert True
-
-
 def test_open_obs():
     global analysis
     analysis.open_obs()
+    for obs_set in analysis.obs.keys():
+        print(analysis.obs[obs_set])
     assert True
 
 
