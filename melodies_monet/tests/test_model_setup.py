@@ -75,8 +75,10 @@ ds_dict = dict()
 for field_name in field_names:
     units = control['model']['test_model']['variables'][field_name]['units']
     generator = control['model']['test_model']['variables'][field_name]['test_generator']
+
     if generator == 'random_uniform':
         field = np.random.rand(ntime, nlat, nlon)
+
     field_da = xr.DataArray(
         field, coords=[time_da, lat_da, lon_da],
         dims=['time', 'lat', 'lon'], attrs={'units': units})
