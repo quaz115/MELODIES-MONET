@@ -1,4 +1,5 @@
-import math
+import logging
+
 import numpy as np
 import scipy as sp
 import xarray as xr
@@ -18,6 +19,8 @@ def gaussian_plume_2d(lon_da, lat_da, time_da, params):
     returns:
         xarray.DataArray
     """
+
+    logging.debug(params)
 
     # nominal Earth equatorial radius (meter)
     R_earth = 6378100.0
