@@ -16,10 +16,16 @@ model:
         mod_type: test
         variables:
             A:
-                units: 'Units of A' 
+                units: 'Units of A'
                 unit_scale: 100.0
                 unit_scale_method: '*'
-                test_generator: random_uniform
+                test_generator: gaussian_plume_2d
+                generator_params:
+                    lon_0: -105.0
+                    lat_0: 40.0
+                    u_0: 20.0
+                    v_0: 0.0
+                    sigma: 50.0e3
             B:
                 units: 'Units of B'
                 unit_scale: 0.01

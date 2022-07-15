@@ -46,4 +46,3 @@ def gaussian_plume_2d(lon_da, lat_da, time_da, params):
     omega = V_norm / R_earth
 
     # great circle X(t) = cos(omega t) X_0 + sin(omega t) V_0
-

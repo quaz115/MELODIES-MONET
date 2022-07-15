@@ -10,6 +10,8 @@ import scipy as sp
 import pandas as pd
 import xarray as xr
 
+from field_generators import gaussian_plume_2d
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--control', type=str,
     default='control.yaml',
@@ -74,10 +76,12 @@ ds_dict = dict()
 
 for field_name in field_names:
     units = control['model']['test_model']['variables'][field_name]['units']
-    generator = control['model']['test_model']['variables'][field_name]['test_generator']
+    field_info = control['model']['test_model']['variables'][field_name]
 
-    if generator == 'random_uniform':
+    if field_info['test_generator'] == 'random_uniform':
         field = np.random.rand(ntime, nlat, nlon)
+    if field_info['test_generator'] == 'gaussian_plume_2d':
+        field = gaussian_plume_2d(lon_da, lat_da, time_da, field_info['generator_params'])
 
     field_da = xr.DataArray(
         field, coords=[time_da, lat_da, lon_da],
