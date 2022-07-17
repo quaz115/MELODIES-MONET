@@ -32,6 +32,15 @@ logging.debug(control)
 
 for model in control['model']:
     logging.info('processing:' + model)
+
+    variables = list()
+    for dataset in control['model'][model]['mapping']:
+        for var in control['model'][model]['mapping'][dataset]:
+            variables.append(var)
+    logging.info(variables)
+
     files = sorted(glob(control['model'][model]['files']))
     for file_in in files:
         logging.info(file_in)
+        file_out = 'subset_' + file_in
+
