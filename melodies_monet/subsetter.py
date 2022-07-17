@@ -3,6 +3,7 @@ import sys
 import argparse
 import logging
 import yaml
+from glob import glob
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--control', type=str,
@@ -28,3 +29,9 @@ with open(args.control, 'r') as f:
     control = yaml.safe_load(f)
 
 logging.debug(control)
+
+for model in control['model']:
+    logging.info('processing:' + model)
+    files = sorted(glob(control['model'][model]['files']))
+    for file_in in files:
+        logging.info(file_in)
