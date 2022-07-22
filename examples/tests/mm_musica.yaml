@@ -1,0 +1,52 @@
+analysis:
+  start_time: '2019-07-01-00:00:00' #UTC
+  end_time:   '2019-07-05-23:59:59' #UTC
+  output_dir: /Users/davidfillmore/Data/MUSICA/melodies_monet_output
+  debug: True
+
+
+model:
+  MUSICA:
+    files: /Users/davidfillmore/Data/MUSICA/f.e22.FCnudged.CONUSne30x8.cesm220.ts13.001/f.e22.FCnudged.CONUSne30x8.cesm220.ts13.001.cam.h3.*nc
+    scrip_file: /Users/davidfillmore/Data/MUSICA/grids/ne0CONUSne30x8/ne0CONUS_ne30x8_np4_SCRIP.nc
+    mod_type: 'cesm_se'
+    radius_of_influence: 12000 # meters
+    mapping: # model species name : obs species name
+      AirNow:
+        PM25_SRF: "PM2.5"
+        O3_SRF: "OZONE"
+      Other:
+        lev: "z"
+    projection: None
+    plot_kwargs:
+      color: 'magenta'
+      marker: 's'
+      linestyle: '-'
+
+obs:
+  AirNow:
+    use_airnow: True
+    filename: /Users/davidfillmore/Data/example_observation_data/surface/AIRNOW_20190901_20190930.nc
+    obs_type: pt_sfc
+    drop_unused: True
+    variables:
+      PM2.5:
+        unit_scale: 1
+        unit_scale_method: '*'
+        nan_value: -1.0
+        ylabel_plot: 'PM2.5 (ug/m3)'
+        ty_scale: 2.0
+        vmin_plot: 0.0
+        vmax_plot: 22.0
+        vdiff_plot: 15.0
+        nlevels_plot: 23
+      OZONE:
+        unit_scale: 1
+        unit_scale_method: '*'
+        nan_value: -1.0
+        ylabel_plot: 'Ozone (ppbv)'
+        vmin_plot: 15.0
+        vmax_plot: 55.0
+        vdiff_plot: 20.0
+        nlevels_plot: 21
+
