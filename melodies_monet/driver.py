@@ -183,10 +183,6 @@ class observation:
 
     def drop_unused(self):
 
-        # drop unused variables
-        print()
-        for var in self.obj.keys():
-            if var not in self.variable_dict:
         # append timestamps and other site info to list of mapped variables
         used_vars = list(self.variable_dict.keys()) \
             + ['time_local', 'utcoffset', 'units',
