@@ -46,8 +46,20 @@ np.random.seed(control['test_setup']['random_seed'])
 
 var_names = control['obs']['test_obs']['variables'].keys()
 df_dict = dict()
+
 for var_name in var_names:
-    df_dict[var_name] = np.random.rand(ntime)
+
+    if 'range_min' in control['obs']['test_obs']['variables'][var_name]:
+        range_min = control['obs']['test_obs']['variables'][var_name]['range_min']
+    else:
+        range_min = 0
+
+    if 'range_max' in control['obs']['test_obs']['variables'][var_name]:
+        range_max = control['obs']['test_obs']['variables'][var_name]['range_max']
+    else:
+        range_max = 1
+
+    df_dict[var_name] = (range_max - range_min) * np.random.rand(ntime) + range_min
 
 df = pd.DataFrame(df_dict, index=datetime_indices).to_xarray()
 ds = xr.Dataset(df)

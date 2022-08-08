@@ -43,6 +43,18 @@ obs:
         obs_type: pt_sfc
         drop_unused_vars: True
         variables:
+            lon:
+                units: 'degrees East'
+                unit_scale: 1.0
+                unit_scale_method: '*'
+                range_min: -120.0
+                range_max: -100.0
+            lat:
+                units: 'degrees North'
+                unit_scale: 1.0
+                unit_scale_method: '*'
+                range_min: 25.0
+                range_max: 45.0
             A_obs:
                 units: 'Units of A' 
                 unit_scale: 1
