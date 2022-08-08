@@ -19,6 +19,9 @@ parser.add_argument('--logfile', type=str,
     help='log file (default stdout)')
 parser.add_argument('--debug', action='store_true',
     help='set logging level to debug')
+parser.add_argument('--nfile', type=int,
+    default=1,
+    help='number of obs files')
 args = parser.parse_args()
 
 """
@@ -45,23 +48,27 @@ Generate random test observations
 np.random.seed(control['test_setup']['random_seed'])
 
 var_names = control['obs']['test_obs']['variables'].keys()
-df_dict = dict()
 
-for var_name in var_names:
+for ifile in range(args.nfile):
 
-    if 'range_min' in control['obs']['test_obs']['variables'][var_name]:
-        range_min = control['obs']['test_obs']['variables'][var_name]['range_min']
-    else:
-        range_min = 0
+    df_dict = dict()
 
-    if 'range_max' in control['obs']['test_obs']['variables'][var_name]:
-        range_max = control['obs']['test_obs']['variables'][var_name]['range_max']
-    else:
-        range_max = 1
+    for var_name in var_names:
+ 
+        if 'range_min' in control['obs']['test_obs']['variables'][var_name]:
+            range_min = control['obs']['test_obs']['variables'][var_name]['range_min']
+        else:
+            range_min = 0
 
-    df_dict[var_name] = (range_max - range_min) * np.random.rand(ntime) + range_min
+        if 'range_max' in control['obs']['test_obs']['variables'][var_name]:
+            range_max = control['obs']['test_obs']['variables'][var_name]['range_max']
+        else:
+            range_max = 1
 
-df = pd.DataFrame(df_dict, index=datetime_indices).to_xarray()
-ds = xr.Dataset(df)
-print(ds)
-ds.to_netcdf(control['obs']['test_obs']['filename'])
+        df_dict[var_name] = (range_max - range_min) * np.random.rand(ntime) + range_min
+
+    df = pd.DataFrame(df_dict, index=datetime_indices).to_xarray()
+    ds = xr.Dataset(df)
+    print(ds)
+    ds.to_netcdf(control['obs']['test_obs']['filename'])
+
