@@ -1,12 +1,9 @@
-import os
 import sys
 import argparse
 import logging
 import yaml
 
-import math
 import numpy as np
-import scipy as sp
 import pandas as pd
 import xarray as xr
 
@@ -42,6 +39,9 @@ datetime_indices = pd.date_range(start_time, end_time,
     freq=control['test_setup']['freq'])
 ntime = len(datetime_indices)
 
+ntime_file = ntime // args.nfile
+logging.debug('ntime_file:%d' % ntime_file)
+
 """
 Generate random test observations
 """
@@ -65,10 +65,13 @@ for ifile in range(args.nfile):
         else:
             range_max = 1
 
-        df_dict[var_name] = (range_max - range_min) * np.random.rand(ntime) + range_min
+        df_dict[var_name] = (range_max - range_min) * np.random.rand(ntime_file) + range_min
 
-    df = pd.DataFrame(df_dict, index=datetime_indices).to_xarray()
+    istart = ifile * ntime_file
+    iend = istart + ntime_file
+    df = pd.DataFrame(df_dict, index=datetime_indices[istart:iend]).to_xarray()
     ds = xr.Dataset(df)
-    print(ds)
-    ds.to_netcdf(control['obs']['test_obs']['filename'])
+    logging.debug(ds)
+    suffix = '_%d.nc' % ifile
+    ds.to_netcdf(control['obs']['test_obs']['filename'].replace('.nc', suffix))
 
